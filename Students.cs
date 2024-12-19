@@ -11,12 +11,31 @@ namespace StudentsClass
             _students = new PascalStudent[numStudents];
         }
 
+        public void addStudent(PascalStudent student)
+        {
+            bool inserted = false;
+            int count = 0;
+            while (!inserted && count < _students.Length)
+            {
+                if (_students[count] == null)
+                {
+                    _students[count] = student;
+                    inserted = true;
+                }
+                count++;
+            }
+            if (!inserted)
+            {
+                throw new ArgumentException("No available slots for a new student");
+            }
+        }
+
         private int _numResult(Result result)
         {
             int count = 0;
             foreach (PascalStudent student in _students)
             {
-                if (student.scrutiny() == result) count++;
+                if (student != null && student.scrutiny() == result) count++;
             }
             return count;
         }
@@ -27,7 +46,7 @@ namespace StudentsClass
 
             int count = 0;
 
-            for (int i = 0; i < positions.Length; i++)
+            for (int i = 0; i < _students.Length; i++)
             {
                 if (_students[i].scrutiny() == result)
                 {
@@ -77,7 +96,7 @@ namespace StudentsClass
             int count = 0;
             foreach (PascalStudent student in _students)
             {
-                if (student.average() == 0)
+                if (student == null || student.average() == 0)
                     count++;
                 else
                     sum += student.average();
@@ -91,31 +110,37 @@ namespace StudentsClass
 
         public PascalStudent lowestAverageStudent()
         {
-            PascalStudent result = _students[0];
-            bool first = true;
-            foreach (PascalStudent student in _students)
+            int i = 0;
+
+            while (i < _students.Length && _students[i] == null)
             {
-                if (!first)
+                i++;
+            }
+
+            if (i == _students.Length)
+                throw new InvalidOperationException("No valid students available");
+
+            PascalStudent result = _students[i];
+
+            for (int j = i + 1; j < _students.Length; j++)
+            {
+                if (_students[j] != null)
                 {
-                    if (student.average() < result.average())
+                    if (_students[i].average() < result.average())
                     {
-                        result = student;
+                        result = _students[i];
                     }
-                    else if (student.average() == result.average())
+                    else if (_students[i].average() == result.average())
                     {
-                        if(string.Compare(student.Surname, result.Surname) < 0)
+                        if (string.Compare(_students[i].Surname, result.Surname) < 0)
                         {
-                            result = student;
+                            result = _students[i];
                         }
-                        else if(string.Compare(student.Surname, result.Surname) == 0)
+                        else if (string.Compare(_students[i].Surname, result.Surname) == 0)
                         {
-                            if (string.Compare(student.Name, result.Name) <= 0) result = student;
+                            if (string.Compare(_students[i].Name, result.Name) <= 0) result = _students[i];
                         }
                     }
-                }
-                else
-                {
-                    first = false;
                 }
             }
             return result;
@@ -123,31 +148,37 @@ namespace StudentsClass
 
         public PascalStudent highestAverageStudent()
         {
-            PascalStudent result = _students[0];
-            bool first = true;
-            foreach (PascalStudent student in _students)
+            int i = 0;
+
+            while (i < _students.Length && _students[i] == null)
             {
-                if (!first)
+                i++;
+            }
+
+            if (i == _students.Length)
+                throw new InvalidOperationException("No valid students available");
+
+            PascalStudent result = _students[i];
+
+            for (int j = i + 1; j < _students.Length; j++)
+            {
+                if (_students[j] != null)
                 {
-                    if (student.average() > result.average())
+                    if (_students[i].average() > result.average())
                     {
-                        result = student;
+                        result = _students[i];
                     }
-                    else if (student.average() == result.average())
+                    else if (_students[i].average() == result.average())
                     {
-                        if (string.Compare(student.Surname, result.Surname) > 0)
+                        if (string.Compare(_students[i].Surname, result.Surname) > 0)
                         {
-                            result = student;
+                            result = _students[i];
                         }
-                        else if (string.Compare(student.Surname, result.Surname) == 0)
+                        else if (string.Compare(_students[i].Surname, result.Surname) == 0)
                         {
-                            if (string.Compare(student.Name, result.Name) >= 0) result = student;
+                            if (string.Compare(_students[i].Name, result.Name) >= 0) result = _students[i];
                         }
                     }
-                }
-                else
-                {
-                    first = false;
                 }
             }
             return result;
@@ -156,22 +187,34 @@ namespace StudentsClass
         public PascalStudent bestMark(int subject)
         {
             if (subject < 1 || subject > 13) throw new ArgumentOutOfRangeException("Subject not valid");
-            PascalStudent result = new PascalStudent(true, "d", "d");
-            bool first = true;
 
-            for (int i = 1; i<_students.Length; i++)
+            int i = 0;
+
+            while (i < _students.Length && _students[i] == null)
             {
-                if (first)
-
-                {
-                    first = false;
-                }
-                else
-                {
-                    if(result.markOfSubject(subject) < _students[i].markOfSubject(subject)) result = _students[i];
-                }
+                i++;
             }
 
+            if (i == _students.Length)
+                throw new InvalidOperationException("No valid students available");
+
+            PascalStudent result = _students[i];
+
+            for (int j = i + 1; j < _students.Length; j++)
+            {
+                if (result.markOfSubject(subject) < _students[j].markOfSubject(subject)) result = _students[j];
+            }
+
+            return result;
+        }
+
+        public int howManyAverage(int averageSearch)
+        {
+            int result = 0;
+            foreach (PascalStudent student in _students)
+            {
+                if(student.average() == averageSearch) result++;
+            }
             return result;
         }
     }
