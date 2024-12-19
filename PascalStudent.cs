@@ -6,7 +6,7 @@
         NOTADMITTED,
         SUSPENDED
     }
-    public class PascalStudent
+    public class PascalStudent:IComparable<PascalStudent>
     {
         private int[] _marks;
         public string Name { get; private set; }
@@ -104,6 +104,35 @@
         {
             if (subject < 1 || subject > _marks.Length) throw new ArgumentOutOfRangeException("Subject not valid");
             return _marks[subject-1];
+        }
+
+        /// <summary>
+        /// ordinamento degli studenti per media (per primo lo studente con la media più alta) (a parità di media per cognome)
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public int CompareTo(PascalStudent? other)
+        {
+            if (other== null || (!(other is PascalStudent ))) throw new ArgumentException("tipo di dato sbagliato");
+
+            if (average()>other.average())
+            {
+                return -1;
+            }
+            else
+            {
+                if (average() == other.average())
+                {
+                    return Surname.CompareTo(other.Surname);
+                }
+                else
+                {
+                    return 1;
+                }
+
+            }
+
+
         }
     }
 }

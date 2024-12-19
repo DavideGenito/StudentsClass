@@ -36,6 +36,8 @@ namespace StudentsClass
                 }
             }
 
+            Array.Sort(positions);
+
             return positions;
         }
 
@@ -157,17 +159,20 @@ namespace StudentsClass
             PascalStudent result = new PascalStudent(true, "d", "d");
             bool first = true;
 
-            foreach (PascalStudent student in _students)
+            for (int i = 1; i<_students.Length; i++)
             {
                 if (first)
+
                 {
                     first = false;
                 }
                 else
                 {
-                    if(result.markOfSubject(subject) < student.markOfSubject(subject)) result = student;
+                    if(result.markOfSubject(subject) < _students[i].markOfSubject(subject)) result = _students[i];
                 }
             }
+
+            return result;
         }
     }
 }

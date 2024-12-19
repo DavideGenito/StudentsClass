@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\davide.genito\\Desktop\\StudentsClass\\StudentsClass.csproj": {}
+    "C:\\Users\\davide.genito\\Desktop\\d\\StudentsClass\\StudentsClass.csproj": {}
   },
   "projects": {
-    "C:\\Users\\davide.genito\\Desktop\\StudentsClass\\StudentsClass.csproj": {
+    "C:\\Users\\davide.genito\\Desktop\\d\\StudentsClass\\StudentsClass.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\davide.genito\\Desktop\\StudentsClass\\StudentsClass.csproj",
+        "projectUniqueName": "C:\\Users\\davide.genito\\Desktop\\d\\StudentsClass\\StudentsClass.csproj",
         "projectName": "StudentsClass",
-        "projectPath": "C:\\Users\\davide.genito\\Desktop\\StudentsClass\\StudentsClass.csproj",
+        "projectPath": "C:\\Users\\davide.genito\\Desktop\\d\\StudentsClass\\StudentsClass.csproj",
         "packagesPath": "C:\\Users\\davide.genito\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\davide.genito\\Desktop\\StudentsClass\\obj\\",
+        "outputPath": "C:\\Users\\davide.genito\\Desktop\\d\\StudentsClass\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
